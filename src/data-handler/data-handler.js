@@ -15,8 +15,10 @@ class DataHandler {
       const eventId = event?.parameters?.[252]
 
       switch (eventId) {
-        // case Config.events.EvInventoryPutItem:
-        //   return EventData.EvInventoryPutItem.handle(event)
+        // case 100:
+        // return EventData.EvGuildPlayer
+        case 99:
+          return EventData.EvGuildUpdate.handle(event)
 
         case Config.events.EvNewCharacter:
           return EventData.EvNewCharacter.handle(event)
@@ -49,7 +51,8 @@ class DataHandler {
           return EventData.EvUpdateLootChest.handle(event)
 
         default:
-          if (process.env.LOG_UNPROCESSED) Logger.silly('handleEventData', event.parameters)
+          if (process.env.LOG_UNPROCESSED)
+            Logger.silly('handleEventData', event.parameters)
       }
     } catch (error) {
       if (error instanceof ParserError) {
@@ -69,7 +72,8 @@ class DataHandler {
           return RequestData.OpInventoryMoveItem.handle(event)
 
         default:
-          if (process.env.LOG_UNPROCESSED) Logger.silly('handleRequestData', event.parameters)
+          if (process.env.LOG_UNPROCESSED)
+            Logger.silly('handleRequestData', event.parameters)
       }
     } catch (error) {
       if (error instanceof ParserError) {
@@ -89,7 +93,8 @@ class DataHandler {
           return ResponseData.OpJoin.handle(event)
 
         default:
-          if (process.env.LOG_UNPROCESSED) Logger.silly('handleResponseData', event.parameters)
+          if (process.env.LOG_UNPROCESSED)
+            Logger.silly('handleResponseData', event.parameters)
       }
     } catch (error) {
       if (error instanceof ParserError) {
