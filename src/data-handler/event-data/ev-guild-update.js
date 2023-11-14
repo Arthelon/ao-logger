@@ -12,6 +12,14 @@ function handle(event) {
     `Player online list: ${util.inspect(onlinePlayerList, false, null, false)}`
   )
   Logger.info(util.inspect(onlinePlayerList, false, null, false))
+
+  // Storage
+  const onlinePlayerMapping = {}
+  for (let i = 0; i < playerNames.length; i++) {
+    onlinePlayerMapping[playerNames[i]] = playersOnline[i]
+  }
+  MemoryStorage.guildiesOnline.init(onlinePlayerMapping)
+  console.log(MemoryStorage.guildiesOnline.getAll())
 }
 
 function parse(event) {
