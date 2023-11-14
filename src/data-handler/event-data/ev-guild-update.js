@@ -2,6 +2,7 @@ const MemoryStorage = require('../../storage/memory-storage')
 const Logger = require('../../utils/logger')
 const ParserError = require('../parser-error')
 const util = require('util')
+const GuildPlayersLogger = require('../../guild-players-logger')
 
 const name = 'EvGuildUpdate'
 
@@ -19,7 +20,8 @@ function handle(event) {
     onlinePlayerMapping[playerNames[i]] = playersOnline[i]
   }
   MemoryStorage.guildiesOnline.init(onlinePlayerMapping)
-  console.log(MemoryStorage.guildiesOnline.getAll())
+  Logger.debug(MemoryStorage.guildiesOnline.getOnlineSerialized())
+  GuildPlayersLogger.write(MemoryStorage.guildiesOnline.getOnlineSerialized())
 }
 
 function parse(event) {

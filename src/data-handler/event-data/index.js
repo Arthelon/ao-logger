@@ -10,6 +10,7 @@ const EvNewLootChest = require('./ev-new-loot-chest')
 const EvOtherGrabbedLoot = require('./ev-other-grabbed-loot')
 const EvUpdateLootChest = require('./ev-update-loot-chest')
 const EvGuildUpdate = require('./ev-guild-update')
+const EvGuildPlayerUpdate = require('./ev-guild-player-update')
 
 module.exports = {
   EvAttachItemContainer,
@@ -23,5 +24,6 @@ module.exports = {
   EvNewLoot,
   EvOtherGrabbedLoot,
   EvUpdateLootChest,
-  EvGuildUpdate
+  EvGuildUpdate,
+  EvGuildPlayerUpdate
 }

@@ -15,9 +15,9 @@ class DataHandler {
       const eventId = event?.parameters?.[252]
 
       switch (eventId) {
-        // case 100:
-        // return EventData.EvGuildPlayer
-        case 99:
+        case 100: // EvGuildPlayerUpdate
+          return EventData.EvGuildPlayerUpdate.handle(event)
+        case 99: // EvGuildUpdate
           return EventData.EvGuildUpdate.handle(event)
 
         case Config.events.EvNewCharacter:

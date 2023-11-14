@@ -19,8 +19,11 @@ class GuildiesOnlineStorage {
     this.guildMembers[playerName] = value
   }
 
-  getAll() {
-    return this.guildMembers
+  getOnlineSerialized() {
+    const onlineNames = Object.entries(this.guildMembers)
+      .filter((entry) => entry[1])
+      .map((entry) => entry[0])
+    return onlineNames.join('\n')
   }
 }
 

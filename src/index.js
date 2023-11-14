@@ -11,6 +11,7 @@ process.on('unhandledRejection', async (reason) => {
 })
 
 const LootLogger = require('./loot-logger')
+const GuildPlayersLogger = require('./guild-players-logger')
 
 const path = require('path')
 
@@ -35,9 +36,13 @@ async function main() {
   try {
     await Config.init()
   } catch (error) {
-    console.info(yellow(`    Problem fetching configurations. Try again or download the latest version.`))
+    console.info(
+      yellow(
+        `    Problem fetching configurations. Try again or download the latest version.`
+      )
+    )
 
-    await new Promise(resolve => setTimeout(resolve, 20000))
+    await new Promise((resolve) => setTimeout(resolve, 20000))
 
     return process.exit(1)
   }
@@ -51,22 +56,23 @@ async function main() {
   AlbionNetwork.on('response-data', DataHandler.handleResponseData)
 
   AlbionNetwork.on('online', () => {
-    console.info(`\n\t${green('ALBION DETECTED')}. Loot events should be logged.\n`)
+    console.info(
+      `\n\t${green('ALBION DETECTED')}. Loot events should be logged.\n`
+    )
     setWindowTitle(`[ON] ${Config.TITLE}`)
   })
 
   AlbionNetwork.on('offline', () => {
     console.info(
-      `\n\t${red(
-        'ALBION NOT DETECTED'
-      )}.\n\n\tIf Albion is running, press "${Config.RESTART_NETWORK_FILE_KEY}" to restart the network listeners or restart AO Loot Logger.\n`
+      `\n\t${red('ALBION NOT DETECTED')}.\n\n\tIf Albion is running, press "${
+        Config.RESTART_NETWORK_FILE_KEY
+      }" to restart the network listeners or restart AO Loot Logger.\n`
     )
 
     setWindowTitle(`[OFF] ${Config.TITLE}`)
   })
 
   AlbionNetwork.init()
-
 
   KeyboardInput.on('key-pressed', (key) => {
     const CTRL_C = '\u0003'
@@ -87,14 +93,25 @@ async function main() {
 
   KeyboardInput.init()
 
-  console.info([
-    '',
-    `Logs will be written to ${path.join(process.cwd(), LootLogger.logFileName)}`,
-    '',
-    `You can always press "${Config.ROTATE_LOGGER_FILE_KEY}" to start a new log file.`,
-    '',
-    `Join the Discord server: ${cyan('https://discord.gg/fvNMF2abXr')} (Ctrl + click to open).`
-  ].join('\n'))
+  console.info(
+    [
+      '',
+      `Loot Logs will be written to ${path.join(
+        process.cwd(),
+        LootLogger.logFileName
+      )}`,
+      `Guild Player Logs will be written to ${path.join(
+        process.cwd(),
+        GuildPlayersLogger.logFileName
+      )}`,
+      '',
+      `You can always press "${Config.ROTATE_LOGGER_FILE_KEY}" to start a new log file.`,
+      '',
+      `Join the Discord server: ${cyan(
+        'https://discord.gg/fvNMF2abXr'
+      )} (Ctrl + click to open).`
+    ].join('\n')
+  )
 }
 
 function restartNetwork() {
