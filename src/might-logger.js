@@ -1,9 +1,8 @@
 const fs = require('fs')
 
-class GuildPlayersLogger {
+class MightLogger {
   constructor() {
     this.logFileName = null
-
     this.createNewLogFileName()
   }
 
@@ -21,7 +20,7 @@ class GuildPlayersLogger {
       .map((n) => n.toString().padStart(2, '0'))
       .join('-')
 
-    this.logFileName = `guild-players-${datetime}.txt`
+    this.logFileName = `might-${datetime}.txt`
   }
 
   write(output) {
@@ -37,4 +36,4 @@ class GuildPlayersLogger {
   }
 }
 
-module.exports = new GuildPlayersLogger()
+module.exports = new MightLogger()

@@ -12,6 +12,7 @@ process.on('unhandledRejection', async (reason) => {
 
 const LootLogger = require('./loot-logger')
 const GuildPlayersLogger = require('./guild-players-logger')
+const MightLogger = require('./might-logger')
 
 const path = require('path')
 
@@ -103,6 +104,10 @@ async function main() {
       `Guild Player Logs will be written to ${path.join(
         process.cwd(),
         GuildPlayersLogger.logFileName
+      )}`,
+      `Might amounts will be written to ${path.join(
+        process.cwd(),
+        MightLogger.logFileName
       )}`,
       '',
       `You can always press "${Config.ROTATE_LOGGER_FILE_KEY}" to start a new log file.`,
