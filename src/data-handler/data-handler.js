@@ -18,7 +18,7 @@ class DataHandler {
       switch (eventId) {
         case 101: // EvGuildPlayerUpdate
           return EventData.EvGuildPlayerUpdate.handle(event)
-        case 99: // EvGuildUpdate
+        case 100: // EvGuildUpdate
           return EventData.EvGuildUpdate.handle(event)
 
         default:
