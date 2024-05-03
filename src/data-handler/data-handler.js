@@ -16,7 +16,7 @@ class DataHandler {
       const eventId = event?.parameters?.[252]
 
       switch (eventId) {
-        case 100: // EvGuildPlayerUpdate
+        case 101: // EvGuildPlayerUpdate
           return EventData.EvGuildPlayerUpdate.handle(event)
         case 99: // EvGuildUpdate
           return EventData.EvGuildUpdate.handle(event)
@@ -62,9 +62,9 @@ class DataHandler {
     try {
       switch (eventId) {
         case 441: // Might ranking
-          return ResponseData.Might.handle(event)
+        // return ResponseData.Might.handle(event)
         case Config.events.OpJoin:
-          return ResponseData.OpJoin.handle(event)
+        // return ResponseData.OpJoin.handle(event)
 
         default:
           if (process.env.LOG_UNPROCESSED)
